@@ -13,7 +13,7 @@ numbers = list(string.digits)
 symbols = list(string.punctuation)
 
 def generator (n_letters, n_numbers, n_symbols):
-# function to add to a list all the characters with the parameters sent by the user
+# function to add to a list all the characters with the arguments sent by the user
 	
 	password = []
 	for char in range(1, n_letters+1):
