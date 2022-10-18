@@ -1,3 +1,13 @@
+'''
+Jokenpo (Rock, Paper and Scissors) in the terminal:
+
+I played around with the code a bit, adding colors, ASCII art, animations for the strings, sounds etc.
+
+I know it could be better, but I don't want to be stuck in it for too long, so I can try other things.
+
+PS: you need to install the "playsound" module to hear the sounds.
+'''
+
 import random
 import sys
 from time import sleep
