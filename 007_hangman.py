@@ -79,5 +79,5 @@ while lives > 0:
     if lives == 0:
         print(stages[0])
         print(f'{Fore.RED}You lose!{Style.RESET_ALL}\n')
-        print(f'{Fore.BLUE}The word was: {Back.WHITE}{chosen_word}.{Style.RESET_ALL}')
+        print(f'{Fore.BLUE}The word was: {Back.WHITE}{chosen_word}{Back.RESET}.{Style.RESET_ALL}')
         break
