@@ -27,7 +27,7 @@ os.system('cls')
 print(f'{Fore.BLUE}{logo}{Style.RESET_ALL}\n\n')
 
 # prints the empty spaces with the lenght of the chosen word
-print(f'{Fore.GREEN}{display}{Style.RESET_ALL}\n\n')
+print(f'{Fore.GREEN}{" ".join(display)}{Style.RESET_ALL}\n\n')
 
 # initializes some variables to keep track of the game state
 lives = 6
@@ -60,23 +60,24 @@ while lives > 0:
         position += 1
 
 # displays the current state of the game with the letters filled in
-    print(f'{Fore.GREEN}{display}{Style.RESET_ALL}\n\n')
+    print(f'{Fore.BLUE}{logo}{Style.RESET_ALL}\n\n')
+    print(f'{Fore.GREEN}{" ".join(display)}{Style.RESET_ALL}\n\n')
     
 # if the word does not contain that letter,
 # it will give -1 to the life of the player
     if track == 0:
-        print(f'{Fore.RED}You lost a live!{Style.RESET_ALL}\n')
+        print(f'{Fore.RED}You lost a live!{Style.RESET_ALL}')
         lives -= 1
 
 # if all the letters are filled, the user wins the game
     if right_letters == len(display):
         print('You won!\n')
-        print(f'{Fore.BLUE}The word was: {chosen_word}.{Style.RESET_ALL}')
+        print(f'{Fore.BLUE}The word was: {Back.WHITE}{chosen_word}.{Style.RESET_ALL}')
         break
     
 # if the user runs out of lives, game over
     if lives == 0:
         print(stages[0])
         print(f'{Fore.RED}You lose!{Style.RESET_ALL}\n')
-        print(f'{Fore.BLUE}The word was: {chosen_word}.{Style.RESET_ALL}')
+        print(f'{Fore.BLUE}The word was: {Back.WHITE}{chosen_word}.{Style.RESET_ALL}')
         break
