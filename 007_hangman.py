@@ -1,3 +1,10 @@
+'''
+This was a pretty tough one.
+I tried not to look at the solution video so I could write the code in my own way.
+I also used the "colorama" module for the very first time
+It was a really fun challenge to do.
+'''
+
 import os
 import random
 from hangman_art import stages
