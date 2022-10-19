@@ -1,19 +1,16 @@
 '''
 This was a pretty tough one.
 I tried not to look at the solution video so I could write the code in my own way.
-I also used the "colorama" module for the very first time
+I also used the "colorama" module for the very first time.
 It was a really fun challenge to do.
 '''
 
 import os
 import random
-from hangman_art import stages
-from hangman_art import logo
-from hangman_words_list import words_list
+from modules.hangman import stages, logo, words_list
 from colorama import Fore, Back, Style
 
-
-# list of the words for the game import from the "hangman_words_list.py" module
+# list of the words for the game import from the "hangman.py" module
 words_list = words_list
 
 # choose a word from the list
