@@ -11,9 +11,9 @@ PS: you need to install the "playsound" module to hear the sounds.
 import random
 import sys
 from time import sleep
-from playsound import playsound
+from colorama import Fore, Back, Style
 
-def animate(text, time=0.001):
+def animate(text, time=0.01):
   for letter in text:
     print(letter, end="")
     sys.stdout.flush()
@@ -21,7 +21,7 @@ def animate(text, time=0.001):
 
 def jokenpo():
     sleep(0.1)
-    animate('\033[1;33m==================================================\n')
+    animate(f'\n\n{Fore.YELLOW}==================================================\n')
     sleep(0.5)
     print('JO!')
     sleep(0.5)
@@ -29,10 +29,10 @@ def jokenpo():
     sleep(0.5)
     print('PO!')
     sleep(0.5)
-    animate('\033[1;33m==================================================\n')
+    animate(f'{Fore.YELLOW}==================================================\n\n')
     sleep(0.1)
 
-print('''\n\033[1;33m
+print(f'''{Fore.YELLOW}
 ⠀⠀⠀⠀⠀⣠⡴⠖⠒⠲⠶⢤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠖⠒⢶⣄⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⢀⡾⠁⠀⣀⠔⠁⠀⠀⠈⠙⠷⣤⠦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠋⠀⠀⠀⢀⡿⠀⠀⠀⠀⠀⠀⠀
 ⣠⠞⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⠈⢿⡀⢠⡶⠒⠳⠶⣄⠀⠀⠀⠀⠀⣴⠟⠁⠀⠀⠀⣰⠏⠀⢀⣤⣤⣄⡀⠀⠀
@@ -54,7 +54,7 @@ print('''\n\033[1;33m
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠳⠦⠾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ''')
 
-animate('\033[1;33m==================================================\n')
+animate(f'{Fore.YELLOW}==================================================\n')
 
 cpu_choice = random.randint(0,2)
 
@@ -66,101 +66,92 @@ user_choice = input('What do you choose?\n\
 try:
     user_choice = int(user_choice)
 except:
-    playsound(r'C:\Windows\Media\ringout.wav')
-    animate('\033[1;31mYOU LOSE! Choose "0", "1" or "2"!\033[m')
+    animate(f'{Fore.RED}YOU LOSE! Choose "0", "1" or "2"!{Style.RESET_ALL}')
     exit()
 
-animate('\033[1;33m==================================================\n')
+animate(f'{Fore.YELLOW}==================================================\n')
 
 if user_choice not in (0, 1, 2):
-    playsound(r'C:\Windows\Media\ringout.wav')
-    animate('\033[1;31mYOU LOSE! Choose "0", "1" or "2"!\033[m')
+    animate(f'{Fore.RED}YOU LOSE! Choose "0", "1" or "2"!{Style.RESET_ALL}')
     exit()
 
 if user_choice == 0:
-    print('\nYou chose ROCK')
-    print('''\033[1;34m
+    animate(f'\n{Fore.GREEN}You chose ROCK')
+    animate(f'''{Fore.GREEN}
     _______
 ---'   ____)
       (_____)
       (_____)
       (____)
----.__(___)\n\033[m''')
+---.__(___)''')
 elif user_choice == 1:
-    print('\nYou chose PAPER')
-    print('''\033[1;34m
+    animate(f'\n{Fore.GREEN}You chose PAPER')
+    animate(f'''{Fore.GREEN}
     _______
 ---'   ____)____
           ______)
           _______)
          _______)
----.__________)\n\033[m''')
+---.__________)''')
 else:
-    print('\nYou chose SCISSORS')
-    print(''''\033[1;34m
+    animate(f'\n{Fore.GREEN}You chose SCISSORS')
+    animate(f'''{Fore.GREEN}
     _______
 ---'   ____)____
           ______)
        __________)
       (____)
----.__(___)\n\033[m''')
+---.__(___)''')
 
 jokenpo()
 
 if cpu_choice == 0:
-    print('\033[1;33mComputer chose ROCK')
-    print('''\033[1;31m
+    animate(f'{Fore.RED}Computer chose ROCK')
+    animate(f'''{Fore.RED}
     _______
 ---'   ____)
     (_____)
     (_____)
     (____)
----.__(___)\033[m''')
+---.__(___)''')
 elif cpu_choice == 1:
-    print('Computer chose PAPER')
-    print('''\033[1;31m
+    animate(f'{Fore.RED}Computer chose PAPER')
+    animate(f'''{Fore.RED}
     _______
 ---'   ____)____
           ______)
           _______)
          _______)
----.__________)\033[m''')
+---.__________)''')
 else:
-    print('Computer chose SCISSORS')
-    print(''''\033[1;31m
+    animate(f'{Fore.RED}Computer chose SCISSORS')
+    animate(f'''{Fore.RED}
     _______
 ---'   ____)____
           ______)
        __________)
       (____)
----.__(___)\033[m''')
+---.__(___)''')
 
 if user_choice == cpu_choice:
-    animate('\033[1;32m\nIT\'S A TIE!\n\033[m')
-    playsound(r'C:\Windows\Media\ringout.wav')
+    animate(f'\n{Fore.BLUE}\nIT\'S A TIE!\n')
 elif user_choice == 0 and cpu_choice == 1:
-    print('\n\033[1;33mPaper covers rock.\033[m')
-    playsound(r'C:\Windows\Media\ringout.wav')
-    animate('\033[1;31m\nYOU LOSE!\n\033[m')
+    animate(f'\n{Fore.RED}\nPaper covers rock.')
+    animate(f'\n{Fore.RED}\nYOU LOSE!\n')
 elif user_choice == 0 and cpu_choice == 2:
-    print('\n\033[1;33mRock smashes scissors.\033[m')
-    animate('\033[1;32m\nYOU WIN!\n\033[m')
-    playsound(r'C:\Windows\Media\tada.wav')
+    animate(f'\n{Fore.GREEN}\nRock smashes scissors.')
+    animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
 elif user_choice == 1 and cpu_choice == 0:
-    print('\n\033[1;33mPaper covers rock\033[m')
-    playsound(r'C:\Windows\Media\tada.wav')
-    animate('\033[1;32m\nYOU WIN!\n\033[m')
+    animate(f'\n{Fore.GREEN}\nPaper covers rock')
+    animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
 elif user_choice == 1 and cpu_choice == 2:
-    print('\n\033[1;33mScissors cuts paper!\033[m')
-    playsound(r'C:\Windows\Media\ringout.wav')
-    animate('\033[1;31m\nYOU LOSE!\n\033[m')
+    animate(f'\n{Fore.RED}\nScissors cuts paper!')
+    animate(f'\n{Fore.RED}\nYOU LOSE!\n')
 elif user_choice == 2 and cpu_choice == 1:
-    print('\n\033[1;33mScissors cuts paper!\033[m')
-    animate('\033[1;32m\nYOU WIN!\n\033[m')
-    playsound(r'C:\Windows\Media\tada.wav')
+    animate(f'\n{Fore.GREEN}\nScissors cuts paper!')
+    animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
 else:
-    print('\n\033[1;33mRock smashes scissors!\033[m')
-    playsound(r'C:\Windows\Media\ringout.wav')
-    animate('\033[1;31m\nYOU LOSE!\n\033[m')
+    animate(f'\n{Fore.RED}\nRock smashes scissors!')
+    animate(f'\n{Fore.RED}\nYOU LOSE!\n')
 
-animate('\033[1;33m==================================================\n\033[m')
+animate(f'\n{Fore.YELLOW}==================================================\n{Style.RESET_ALL}')
