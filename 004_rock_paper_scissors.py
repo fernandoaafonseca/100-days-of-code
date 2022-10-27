@@ -54,7 +54,7 @@ print(f'''{Fore.YELLOW}
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠳⠦⠾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ''')
 
-animate(f'{Fore.YELLOW}==================================================\n')
+animate(f'{Fore.YELLOW}==================================================\n{Style.RESET_ALL}')
 
 cpu_choice = random.randint(0,2)
 
