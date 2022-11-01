@@ -51,7 +51,7 @@ def calculate(measure, list_of_nums):
         if length % 2 == 0:
             m1 = list_of_nums[length // 2]
             m2 = list_of_nums[length // 2 - 1]
-            median = (m1+ m2) / 2
+            median = (m1 + m2) / 2
         else:
             median = list_of_nums[length // 2]
         print(f'\nThe median of {list_of_nums} is: \n{median}')
