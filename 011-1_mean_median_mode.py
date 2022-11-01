@@ -1,3 +1,8 @@
+'''
+I challenged myself to code functions for the mean, median and mode measures without using any external modules.
+The mode was the trickiest one to implement by iterating over a dictionary but in the end, everything worked out.
+'''
+
 def main():
     list_of_nums = []
     continue_to_add = True
