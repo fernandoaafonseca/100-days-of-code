@@ -68,13 +68,13 @@ while not game_over:
     if user_score == 0 or dealer_score == 0 or user_score > 21:
         game_over = True
     else:
-        hit_or_stack = input('\n\nDo you want to hit one more card?\nType "y" or "n":\n')
-        if hit_or_stack == 'y':
+        hit_or_stick = input('\n\nDo you want to hit one more card?\nType "y" or "n":\n')
+        if hit_or_stick == 'y':
             user_cards += deal_card(1)
             cls()
             print(f'\nDealer cards: [{dealer_cards[0]}, ?]')
             print(f'\nYour cards: {user_cards}')
-        elif hit_or_stack == 'n':
+        elif hit_or_stick == 'n':
             game_over = True
 
 if user_score > 0:
