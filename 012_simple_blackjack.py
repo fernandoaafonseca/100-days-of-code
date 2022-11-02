@@ -2,6 +2,16 @@ import os
 import random
 from time import sleep
 
+logo = """
+.------.            _     _            _    _            _    
+|A_  _ |.          | |   | |          | |  (_)          | |   
+|( \/ ).-----.     | |__ | | __ _  ___| | ___  __ _  ___| | __
+| \  /|K /\  |     | '_ \| |/ _` |/ __| |/ / |/ _` |/ __| |/ /
+|  \/ | /  \ |     | |_) | | (_| | (__|   <| | (_| | (__|   < 
+`-----| \  / |     |_.__/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_\\
+      |  \/ K|                            _/ |                
+      `------'                           |__/           
+"""
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -57,6 +67,7 @@ user_cards = deal_card(2)
 dealer_cards = deal_card(2)
 
 cls()
+print(logo)
 print(f'\nDealer cards: [{dealer_cards[0]}, ?]')
 print(f'\nYour cards: {user_cards}')
 
@@ -72,6 +83,7 @@ while not game_over:
         if hit_or_stick == 'y':
             user_cards += deal_card(1)
             cls()
+            print(logo)
             print(f'\nDealer cards: [{dealer_cards[0]}, ?]')
             print(f'\nYour cards: {user_cards}')
         elif hit_or_stick == 'n':
@@ -80,6 +92,7 @@ while not game_over:
 if user_score > 0:
     while dealer_score != 0 and dealer_score < 17:
         cls()
+        print(logo)
         print(f'\nDealer cards: {dealer_cards}')
         print(f'\nYour cards: {user_cards}')
         sleep(2)
@@ -87,6 +100,7 @@ if user_score > 0:
         dealer_score = calculate_score(dealer_cards)
 
 cls()
+print(logo)
 print(f'\nDealer cards: {dealer_cards}')
 print(f'\nYour cards: {user_cards}')
 sleep(2)
