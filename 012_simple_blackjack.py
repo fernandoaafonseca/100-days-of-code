@@ -79,23 +79,27 @@ while not game_over:
 
 if user_score > 0:
     while dealer_score != 0 and dealer_score < 17:
-        dealer_cards += deal_card(1)
-        dealer_score = calculate_score(dealer_cards)
         cls()
         print(f'\nDealer cards: {dealer_cards}')
         print(f'\nYour cards: {user_cards}')
-        sleep(1)
+        sleep(2)
+        dealer_cards += deal_card(1)
+        dealer_score = calculate_score(dealer_cards)
 
 cls()
 print(f'\nDealer cards: {dealer_cards}')
 print(f'\nYour cards: {user_cards}')
+sleep(2)
 
 final_result = compare(user_score, dealer_score)
 if final_result == 'draw':
     print(f'\nIt\'s a {final_result}!')
 elif final_result == 'bust':
     if user_score > 21:
-        print(f'\nYou\'re busted! You lose!')
+        if dealer_score > 21:
+            print(f'\nIt\'s a draw!')
+        else:
+            print(f'\nYou\'re busted! You lose!')
     else:
         print(f'\nThe computer is busted! You lose!')
 elif final_result == 'blackjack':
