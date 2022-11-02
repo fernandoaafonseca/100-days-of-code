@@ -58,7 +58,7 @@ dealer_cards = deal_card(2)
 
 cls()
 print(f'\nDealer cards: [{dealer_cards[0]}, ?]')
-print(f'Your cards: {user_cards}')
+print(f'\nYour cards: {user_cards}')
 
 while not game_over:
     user_score = calculate_score(user_cards)
@@ -68,24 +68,23 @@ while not game_over:
     if user_score == 0 or dealer_score == 0 or user_score > 21:
         game_over = True
     else:
-        hit_or_stack = input('\nDo you want to hit one more card?\nType "y" or "n":\n')
+        hit_or_stack = input('\n\nDo you want to hit one more card?\nType "y" or "n":\n')
         if hit_or_stack == 'y':
             user_cards += deal_card(1)
             cls()
             print(f'\nDealer cards: [{dealer_cards[0]}, ?]')
-            print(f'Your cards: {user_cards}')
+            print(f'\nYour cards: {user_cards}')
         elif hit_or_stack == 'n':
             game_over = True
 
-if user_score < 21:
+if user_score > 0:
     while dealer_score != 0 and dealer_score < 17:
         dealer_cards += deal_card(1)
         dealer_score = calculate_score(dealer_cards)
-        for card in dealer_cards:
-            cls()
-            print(f'\nDealer cards: {dealer_cards}')
-            print(f'Your cards: {user_cards}')
-            sleep(2)
+        cls()
+        print(f'\nDealer cards: {dealer_cards}')
+        print(f'\nYour cards: {user_cards}')
+        sleep(1)
 
 cls()
 print(f'\nDealer cards: {dealer_cards}')
@@ -103,4 +102,4 @@ elif final_result == 'blackjack':
     print(f'\nBLACKJACK! You win!')
 else:
     print(f'\nYou {final_result}!')
-print('\nGAME OVER!')
+print('\nGAME OVER!\n')
