@@ -33,6 +33,9 @@ def calculate_score(player_cards):
         player_cards.remove(11)
         player_cards.append(1)
         sum_cards = sum(player_cards)
+        print(logo)
+        print(f'\nDealer cards: [{dealer_cards[0]}, ?]')
+        print(f'\nYour cards: {user_cards}')
     if player_cards == 21:
         return 0
     return sum_cards
