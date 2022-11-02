@@ -9,6 +9,8 @@ def main():
 
     while continue_to_add:
         num = ''
+        add_more = '_'
+
         while type(num) != 'float':
             try:
                 num = float(num)
@@ -16,26 +18,29 @@ def main():
                 break
             except:
                 num = input('\nWrite a number:\n')
-		
-        add_more = ''
+
+        answer = ''
         valid_answers = ['y', 'n']
-	
-        while add_more not in valid_answers:
-            add_more = input('\nDo you want to add more numbers?\nType "yes" or "no":\n').lower()
-            if add_more[0] == 'n':
+        while answer not in valid_answers:
+            answer = input('\nDo you want to add more numbers?\nType "yes" or "no":\n').lower()
+            add_more = answer[0]
+
+            if add_more == 'n':
                 continue_to_add = False
-    
+                break
+            elif add_more == 'y':
+                break
+
     measure = ''
     valid_measures = [1, 2, 3, 4]
-    
     while measure not in valid_measures:
         measure = int(input('\nWhat measure of central tendency do you want to calculate?\
-        	\n1: mean\
-        	\n2: median\
-        	\n3: mode\
-        	\n4: all of the above\n'))
-    
-    calculate(measure, list_of_nums)
+                \n1: mean\
+                \n2: median\
+            \n3: mode\
+            \n4: all of the above\n'))
+        
+        calculate(measure, list_of_nums)
             
             
 def calculate(measure, list_of_nums):
@@ -43,11 +48,10 @@ def calculate(measure, list_of_nums):
         mean = sum(list_of_nums) / len(list_of_nums)
         print(f'\nThe mean of {list_of_nums} is: \n{mean:.2f}')
 
-
     def median():
         list_of_nums.sort()
         length = len(list_of_nums)
-        
+
         if length % 2 == 0:
             m1 = list_of_nums[length // 2]
             m2 = list_of_nums[length // 2 - 1]
@@ -55,7 +59,6 @@ def calculate(measure, list_of_nums):
         else:
             median = list_of_nums[length // 2]
         print(f'\nThe median of {list_of_nums} is: \n{median}')
-
 
     def mode():
         temp = 0
@@ -80,11 +83,10 @@ def calculate(measure, list_of_nums):
                 else:
                     continue
             
+            print(f'\nThe mode(s) of {list_of_nums} are:')
             for k, v in mode.items():
-                print(f'\nThe mode(s) of {list_of_nums} are:')
-                print(f'\n{k}, which appeared {v} times.')
+                print(f'{k}, which appeared {v} times.')
             break
-
 
     if measure == 1:
         mean()
