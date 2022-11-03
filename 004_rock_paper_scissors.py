@@ -34,13 +34,13 @@ def jokenpo(user_choice):
     cpu_choice = random.randint(0,2)
 
     if user_choice == 0:
-        animate(f'\n{Fore.GREEN}You chose ROCK{Style.RESET_ALL}')
+        animate(f'{Fore.GREEN}You chose ROCK{Style.RESET_ALL}')
         animate(f'{Fore.GREEN}{rock}')
     elif user_choice == 1:
-        animate(f'\n{Fore.GREEN}You chose PAPER{Style.RESET_ALL}')
+        animate(f'{Fore.GREEN}You chose PAPER{Style.RESET_ALL}')
         animate(f'{Fore.GREEN}{paper}')
     else:
-        animate(f'\n{Fore.GREEN}You chose SCISSORS{Style.RESET_ALL}')
+        animate(f'{Fore.GREEN}You chose SCISSORS{Style.RESET_ALL}')
         animate(f'{Fore.GREEN}{scissors}')
 
     if cpu_choice == 0:
@@ -65,16 +65,16 @@ def compare(user_choice, cpu_choice):
         animate(f'\n\n{Fore.GREEN}\nRock smashes scissors.')
         animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
     elif user_choice == 1 and cpu_choice == 0:
-        animate(f'\n\n{Fore.GREEN}\nPaper covers rock')
+        animate(f'\n\n{Fore.GREEN}\nPaper covers rock.')
         animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
     elif user_choice == 1 and cpu_choice == 2:
-        animate(f'\n{Fore.RED}\nScissors cuts paper!')
+        animate(f'\n{Fore.RED}\nScissors cuts paper.')
         animate(f'\n{Fore.RED}\nYOU LOSE!\n')
     elif user_choice == 2 and cpu_choice == 1:
-        animate(f'\n{Fore.GREEN}\nScissors cuts paper!')
+        animate(f'\n{Fore.GREEN}\nScissors cuts paper.')
         animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
     else:
-        animate(f'\n{Fore.RED}\nRock smashes scissors!')
+        animate(f'\n{Fore.RED}\nRock smashes scissors.')
         animate(f'\n{Fore.RED}\nYOU LOSE!\n')
     animate(f'\n{Fore.YELLOW}==================================================\n{Style.RESET_ALL}')
 
