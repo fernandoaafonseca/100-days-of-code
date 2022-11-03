@@ -2,4 +2,4 @@ My main objective in this repository is not only to complete the challenges but 
 
 I spent several months without coding because I was out of time, so I decided to restart my journey with Python from scratch. 🤓🖥️🐍
 
-I'm currently following the Angela Yu's course on Udemy (https://www.udemy.com/course/100-days-of-code/) and trying to do some other challenges too.
+I'm currently following the Angela Yu's course on Udemy (https://www.udemy.com/course/100-days-of-code/) and this list of challenges: https://amankharwal.medium.com/130-python-projects-with-source-code-61f498591bb.
