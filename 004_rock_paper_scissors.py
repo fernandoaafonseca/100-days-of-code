@@ -18,6 +18,7 @@ def animate(text, time=0.01):
 
 
 def jokenpo(user_choice):
+    os.system('cls' if os.name=='nt' else 'clear')
     sleep(0.1)
     animate(f'\n{Fore.YELLOW}==================================================\n')
     sleep(0.5)
