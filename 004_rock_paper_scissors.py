@@ -1,17 +1,14 @@
 '''
-Jokenpo (Rock, Paper and Scissors) in the terminal:
-
-I played around with the code a bit, adding colors, ASCII art, animations for the strings, sounds etc.
-
-I know it could be better, but I don't want to be stuck in it for too long, so I can try other things.
-
-PS: you need to install the "playsound" module to hear the sounds.
+Jokenpo (Rock, Paper and Scissors) game running in the terminal.
+I played around with the code a bit, adding colors, ASCII art and animations for the strings.
 '''
 
+import os
 import random
 import sys
 from time import sleep
 from colorama import Fore, Back, Style
+
 
 def animate(text, time=0.01):
   for letter in text:
@@ -19,9 +16,10 @@ def animate(text, time=0.01):
     sys.stdout.flush()
     sleep(time)
 
-def jokenpo():
+
+def jokenpo(user_choice):
     sleep(0.1)
-    animate(f'\n\n{Fore.YELLOW}==================================================\n')
+    animate(f'\n{Fore.YELLOW}==================================================\n')
     sleep(0.5)
     print('JO!')
     sleep(0.5)
@@ -32,126 +30,115 @@ def jokenpo():
     animate(f'{Fore.YELLOW}==================================================\n\n')
     sleep(0.1)
 
-print(f'''{Fore.YELLOW}
-⠀⠀⠀⠀⠀⣠⡴⠖⠒⠲⠶⢤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠖⠒⢶⣄⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⢀⡾⠁⠀⣀⠔⠁⠀⠀⠈⠙⠷⣤⠦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠋⠀⠀⠀⢀⡿⠀⠀⠀⠀⠀⠀⠀
-⣠⠞⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⠈⢿⡀⢠⡶⠒⠳⠶⣄⠀⠀⠀⠀⠀⣴⠟⠁⠀⠀⠀⣰⠏⠀⢀⣤⣤⣄⡀⠀⠀
-⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠟⠛⠛⠃⠸⡇⠈⣇⠸⡇⠀⠀⠀⠘⣇⠀⠀⣠⡾⠁⠀⠀⠀⢀⣾⣣⡴⠚⠉⠀⠀⠈⠹⡆⠀
-⣹⡷⠤⠤⠤⠄⠀⠀⠀⠀⢠⣤⡤⠶⠖⠛⠀⣿⠀⣿⠀⢻⡄⠀⠀⠀⢻⣠⡾⠋⠀⠀⠀⠀⣠⡾⠋⠁⠀⠀⠀⠀⢀⣠⡾⠃⠀
-⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡤⠖⠋⢀⣿⣠⠏⠀⠀⣿⠀⠀⠀⠘⠉⠀⠀⠀⠀⠀⡰⠋⠀⠀⠀⠀⠀⣠⠶⠋⠁⠀⠀⠀
-⢿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠁⠀⠀⠠⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠁⠀⠀⠀⢀⣴⡿⠥⠶⠖⠛⠛⢶⡄
-⠀⠉⢿⡋⠉⠉⠁⠀⠀⠀⠀⠀⢀⣠⠾⠋⠀⠀⠀⠀⢀⣰⡇⠀⠀⢀⡄⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⠀⠀⠀⢀⣠⠼⠃
-⠀⠀⠈⠛⠶⠦⠤⠤⠤⠶⠶⠛⠋⠁⠀⠀⠀⠀⠀⠀⣿⠉⣇⠀⡴⠟⠁⣠⡾⠃⠀⠀⠀⠀⠀⠈⠀⠀⠀⣀⣤⠶⠛⠉⠀⠀⠀
-⠀⠀⠀⠀⢀⣠⣤⣀⣠⣤⠶⠶⠒⠶⠶⣤⣀⠀⠀⠀⢻⡄⠹⣦⠀⠶⠛⢁⣠⡴⠀⠀⠀⠀⠀⠀⣠⡶⠛⠉⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⢀⡴⠋⣠⠞⠋⠁⠀⠀⠀⠀⠙⣄⠀⠙⢷⡀⠀⠀⠻⣄⠈⢷⣄⠈⠉⠁⠀⠀⠀⢀⣠⡴⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⢀⡾⠁⣴⠋⠰⣤⣄⡀⠀⠀⠀⠀⠈⠳⢤⣼⣇⣀⣀⠀⠉⠳⢤⣭⡿⠒⠶⠶⠒⠚⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⢸⠃⢰⠇⠰⢦⣄⡈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠛⠛⠓⠲⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠸⣧⣿⠀⠻⣤⡈⠛⠳⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠈⠹⣆⠀⠈⠛⠂⠀⠀⠀⠀⠀⠀⠈⠐⠒⠒⠶⣶⣶⠶⠤⠤⣤⣠⡼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠹⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠳⢦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠈⠻⣦⣀⠀⠀⠀⠀⠐⠲⠤⣤⣀⡀⠀⠀⠀⠀⠀⠉⢳⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠶⠤⠤⠤⠶⠞⠋⠉⠙⠳⢦⣄⡀⠀⠀⠀⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠳⠦⠾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-''')
+    cpu_choice = random.randint(0,2)
 
-animate(f'{Fore.YELLOW}==================================================\n{Style.RESET_ALL}')
+    if user_choice == 0:
+        animate(f'\n{Fore.GREEN}You chose ROCK{Style.RESET_ALL}')
+        animate(f'{Fore.GREEN}{rock}')
+    elif user_choice == 1:
+        animate(f'\n{Fore.GREEN}You chose PAPER{Style.RESET_ALL}')
+        animate(f'{Fore.GREEN}{paper}')
+    else:
+        animate(f'\n{Fore.GREEN}You chose SCISSORS{Style.RESET_ALL}')
+        animate(f'{Fore.GREEN}{scissors}')
 
-cpu_choice = random.randint(0,2)
+    if cpu_choice == 0:
+        animate(f'\n\n\n{Fore.RED}Computer chose ROCK{Style.RESET_ALL}')
+        animate(f'{Fore.RED}{rock}')
+    elif cpu_choice == 1:
+        animate(f'\n\n\n{Fore.RED}Computer chose PAPER{Style.RESET_ALL}')
+        animate(f'{Fore.RED}{paper}')
+    else:
+        animate(f'\n\n\n{Fore.RED}Computer chose SCISSORS{Style.RESET_ALL}')
+        animate(f'{Fore.RED}{scissors}')
 
-user_choice = input('What do you choose?\n\
-    0 - Rock\n\
-    1 - Paper\n\
-    2 - Scissors\n')
+    compare(user_choice, cpu_choice)
 
-try:
-    user_choice = int(user_choice)
-except:
-    animate(f'{Fore.RED}YOU LOSE! Choose "0", "1" or "2"!{Style.RESET_ALL}')
-    exit()
+def compare(user_choice, cpu_choice):
+    if user_choice == cpu_choice:
+        animate(f'\n{Fore.BLUE}\nIT\'S A TIE!\n')
+    elif user_choice == 0 and cpu_choice == 1:
+        animate(f'\n\n{Fore.RED}\nPaper covers rock.')
+        animate(f'\n{Fore.RED}\nYOU LOSE!\n')
+    elif user_choice == 0 and cpu_choice == 2:
+        animate(f'\n\n{Fore.GREEN}\nRock smashes scissors.')
+        animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
+    elif user_choice == 1 and cpu_choice == 0:
+        animate(f'\n\n{Fore.GREEN}\nPaper covers rock')
+        animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
+    elif user_choice == 1 and cpu_choice == 2:
+        animate(f'\n{Fore.RED}\nScissors cuts paper!')
+        animate(f'\n{Fore.RED}\nYOU LOSE!\n')
+    elif user_choice == 2 and cpu_choice == 1:
+        animate(f'\n{Fore.GREEN}\nScissors cuts paper!')
+        animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
+    else:
+        animate(f'\n{Fore.RED}\nRock smashes scissors!')
+        animate(f'\n{Fore.RED}\nYOU LOSE!\n')
+    animate(f'\n{Fore.YELLOW}==================================================\n{Style.RESET_ALL}')
 
-animate(f'{Fore.YELLOW}==================================================\n')
 
-if user_choice not in (0, 1, 2):
-    animate(f'{Fore.RED}YOU LOSE! Choose "0", "1" or "2"!{Style.RESET_ALL}')
-    exit()
+def main():
+    os.system('cls' if os.name=='nt' else 'clear')
+    user_choice = ''
+    valid_choices = [0, 1, 2]
+    while user_choice not in valid_choices:
+        os.system('cls' if os.name=='nt' else 'clear')
+        print(f'{Fore.YELLOW}{logo}{Style.RESET_ALL}')
+        user_choice = int(input('What do you choose?\n\
+            0 - Rock\n\
+            1 - Paper\n\
+            2 - Scissors\n'))
+        if user_choice in valid_choices:
+            jokenpo(user_choice)
 
-if user_choice == 0:
-    animate(f'\n{Fore.GREEN}You chose ROCK')
-    animate(f'''{Fore.GREEN}
-    _______
----'   ____)
-      (_____)
-      (_____)
-      (____)
----.__(___)''')
-elif user_choice == 1:
-    animate(f'\n{Fore.GREEN}You chose PAPER')
-    animate(f'''{Fore.GREEN}
-    _______
----'   ____)____
-          ______)
-          _______)
-         _______)
----.__________)''')
-else:
-    animate(f'\n{Fore.GREEN}You chose SCISSORS')
-    animate(f'''{Fore.GREEN}
-    _______
----'   ____)____
-          ______)
-       __________)
-      (____)
----.__(___)''')
 
-jokenpo()
-
-if cpu_choice == 0:
-    animate(f'{Fore.RED}Computer chose ROCK')
-    animate(f'''{Fore.RED}
+rock = '''
     _______
 ---'   ____)
     (_____)
     (_____)
     (____)
----.__(___)''')
-elif cpu_choice == 1:
-    animate(f'{Fore.RED}Computer chose PAPER')
-    animate(f'''{Fore.RED}
-    _______
----'   ____)____
-          ______)
-          _______)
-         _______)
----.__________)''')
-else:
-    animate(f'{Fore.RED}Computer chose SCISSORS')
-    animate(f'''{Fore.RED}
-    _______
----'   ____)____
-          ______)
-       __________)
-      (____)
----.__(___)''')
+---.__(___)'''
 
-if user_choice == cpu_choice:
-    animate(f'\n{Fore.BLUE}\nIT\'S A TIE!\n')
-elif user_choice == 0 and cpu_choice == 1:
-    animate(f'\n{Fore.RED}\nPaper covers rock.')
-    animate(f'\n{Fore.RED}\nYOU LOSE!\n')
-elif user_choice == 0 and cpu_choice == 2:
-    animate(f'\n{Fore.GREEN}\nRock smashes scissors.')
-    animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
-elif user_choice == 1 and cpu_choice == 0:
-    animate(f'\n{Fore.GREEN}\nPaper covers rock')
-    animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
-elif user_choice == 1 and cpu_choice == 2:
-    animate(f'\n{Fore.RED}\nScissors cuts paper!')
-    animate(f'\n{Fore.RED}\nYOU LOSE!\n')
-elif user_choice == 2 and cpu_choice == 1:
-    animate(f'\n{Fore.GREEN}\nScissors cuts paper!')
-    animate(f'\n{Fore.GREEN}\nYOU WIN!\n')
-else:
-    animate(f'\n{Fore.RED}\nRock smashes scissors!')
-    animate(f'\n{Fore.RED}\nYOU LOSE!\n')
+paper = '''
+    _______
+---'   ____)__
+        ______)
+        _______)
+        _______)
+---.__________)'''
 
-animate(f'\n{Fore.YELLOW}==================================================\n{Style.RESET_ALL}')
+scissors = '''
+    _______
+---'   ____)__
+        ______)
+    __________)
+    (____)
+---.__(___)'''
+
+logo = '''
+    ⠀⠀⠀⠀⠀⣠⡴⠖⠒⠲⠶⢤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠖⠒⢶⣄⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⢀⡾⠁⠀⣀⠔⠁⠀⠀⠈⠙⠷⣤⠦⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡼⠋⠀⠀⠀⢀⡿⠀⠀⠀⠀⠀⠀⠀
+    ⣠⠞⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠘⢧⠈⢿⡀⢠⡶⠒⠳⠶⣄⠀⠀⠀⠀⠀⣴⠟⠁⠀⠀⠀⣰⠏⠀⢀⣤⣤⣄⡀⠀⠀
+    ⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠟⠛⠛⠃⠸⡇⠈⣇⠸⡇⠀⠀⠀⠘⣇⠀⠀⣠⡾⠁⠀⠀⠀⢀⣾⣣⡴⠚⠉⠀⠀⠈⠹⡆⠀
+    ⣹⡷⠤⠤⠤⠄⠀⠀⠀⠀⢠⣤⡤⠶⠖⠛⠀⣿⠀⣿⠀⢻⡄⠀⠀⠀⢻⣠⡾⠋⠀⠀⠀⠀⣠⡾⠋⠁⠀⠀⠀⠀⢀⣠⡾⠃⠀
+    ⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡤⠖⠋⢀⣿⣠⠏⠀⠀⣿⠀⠀⠀⠘⠉⠀⠀⠀⠀⠀⡰⠋⠀⠀⠀⠀⠀⣠⠶⠋⠁⠀⠀⠀
+    ⢿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠋⠁⠀⠀⠠⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠁⠀⠀⠀⢀⣴⡿⠥⠶⠖⠛⠛⢶⡄
+    ⠀⠉⢿⡋⠉⠉⠁⠀⠀⠀⠀⠀⢀⣠⠾⠋⠀⠀⠀⠀⢀⣰⡇⠀⠀⢀⡄⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⠀⠀⠀⢀⣠⠼⠃
+    ⠀⠀⠈⠛⠶⠦⠤⠤⠤⠶⠶⠛⠋⠁⠀⠀⠀⠀⠀⠀⣿⠉⣇⠀⡴⠟⠁⣠⡾⠃⠀⠀⠀⠀⠀⠈⠀⠀⠀⣀⣤⠶⠛⠉⠀⠀⠀
+    ⠀⠀⠀⠀⢀⣠⣤⣀⣠⣤⠶⠶⠒⠶⠶⣤⣀⠀⠀⠀⢻⡄⠹⣦⠀⠶⠛⢁⣠⡴⠀⠀⠀⠀⠀⠀⣠⡶⠛⠉⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⢀⡴⠋⣠⠞⠋⠁⠀⠀⠀⠀⠙⣄⠀⠙⢷⡀⠀⠀⠻⣄⠈⢷⣄⠈⠉⠁⠀⠀⠀⢀⣠⡴⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⢀⡾⠁⣴⠋⠰⣤⣄⡀⠀⠀⠀⠀⠈⠳⢤⣼⣇⣀⣀⠀⠉⠳⢤⣭⡿⠒⠶⠶⠒⠚⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⢸⠃⢰⠇⠰⢦⣄⡈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠛⠛⠓⠲⢦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠸⣧⣿⠀⠻⣤⡈⠛⠳⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠈⠹⣆⠀⠈⠛⠂⠀⠀⠀⠀⠀⠀⠈⠐⠒⠒⠶⣶⣶⠶⠤⠤⣤⣠⡼⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠹⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠳⢦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠈⠻⣦⣀⠀⠀⠀⠀⠐⠲⠤⣤⣀⡀⠀⠀⠀⠀⠀⠉⢳⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠶⠤⠤⠤⠶⠞⠋⠉⠙⠳⢦⣄⡀⠀⠀⠀⡷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠳⠦⠾⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    '''
+
+
+if __name__ == '__main__':
+    main()
