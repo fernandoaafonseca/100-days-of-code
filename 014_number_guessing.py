@@ -7,10 +7,10 @@ def set_difficulty():
     while difficulty not in valid_difficulties:
         difficulty = input(f'Choose a difficulty. Type "easy" or "hard":\n').lower()
         if difficulty == 'easy':
-            attempts = 10
+            attempts = EASY_LEVEL
             return attempts
         elif difficulty == 'hard':
-            attempts = 5
+            attempts = HARD_LEVEL
             return attempts
 
 
@@ -43,7 +43,8 @@ def game(attempts):
             print(f'The number was: {number}.')
             game_over = True
 
-
+HARD_LEVEL = 5
+EASY_LEVEL = 10
 print('Number guessing game!')
 print('I\'m thinking of a number between 1 and 100.')
 number = random.randint(1, 100)
