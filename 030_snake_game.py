@@ -73,7 +73,7 @@ class Food(Turtle):
 
     def __init__(self):
         super().__init__()
-        self.shape('circle')
+        self.shape('square')
         self.shapesize(stretch_len=0.5, stretch_wid=0.5)
         self.penup()
         self.speed('fastest')
@@ -167,7 +167,7 @@ def game_brain():
             snake.increase_size()
             scoreboard.increase_points()
 
-        if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 245 or snake.head.ycor() < -280:
+        if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 245 or snake.head.ycor() < -290:
             game_over = True
             scoreboard.final_score()
 
