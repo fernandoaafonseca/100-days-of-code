@@ -166,6 +166,7 @@ class Scoreboard(Turtle):
         self.goto(0, -25)
         self.write(f'{self.p1_points} X {self.p2_points}', align='center', font=FONT)
         self.write(f'', align='center', font=FONT)
+        screen.exitonclick()
 
 
 class Table(Turtle):
