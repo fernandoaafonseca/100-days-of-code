@@ -1,10 +1,9 @@
 from turtle import Turtle, Screen
 import time
 import random
-from threading import Timer
 
 
-FONT = ('Scheherazade', 28, 'normal')
+FONT = ('Courier', 28, 'normal')
 
 
 class Paddle(Turtle):
@@ -17,14 +16,13 @@ class Paddle(Turtle):
         self.penup()
         self.speed = 30
         self.create_player(i)
-        self.screen.listen()
 
 
     def create_player(self, i):
         if i == 1:
-            self.goto(-350, 0)
+            self.goto(-450, 0)
         elif i == 2:
-            self.goto(350, 0)
+            self.goto(450, 0)
 
     
     def move_up(self):
@@ -32,7 +30,7 @@ class Paddle(Turtle):
             new_y = self.ycor() + self.speed
             self.goto(self.xcor(), new_y)
 
-    
+
     def move_down(self):
         if self.ycor() >= -200:
             new_y = self.ycor() - self.speed
@@ -61,31 +59,29 @@ class Paddle(Turtle):
             case 0:
                 self.mode = 0
             case 1:
-                self.mode = 90
+                self.mode = 99
             case 2:
-                self.mode = 80
+                self.mode = 95
             case 3:
-                self.mode = 70
+                self.mode = 89
             case 4:
-                self.mode = 60
+                self.mode = 85
             case 5:
-                self.mode = 1
+                self.mode = 2
 
         
     def ai_movement(self):
         self.offset = 10
 
-        if ball.heading() < 90 or ball.heading() > 270:        
+        if ball.heading() < 90 or ball.heading() > 270:       
+            choice = random.randint(1, 100) 
             if ball.ycor() > self.ycor() + self.offset:
-                choice = random.randint(1, 100)
-                if choice >= self.mode:
+                if self.mode <= choice:
                     self.move_up()
                 else:
                     pass
-
             elif ball.ycor() < self.ycor() - self.offset:
-                choice = random.randint(1, 100)
-                if choice >= self.mode:
+                if self.mode <= choice:
                     self.move_down()
                 else:
                     pass
@@ -100,11 +96,11 @@ class Ball(Turtle):
 
     def create_ball(self):
         self.penup()
-        self.speed = 9
         self.goto(0, 0)
         self.color('white')
-        self.shape('circle')
-        self.shapesize(1.5, 1.5)
+        self.shape('square')
+        self.shapesize(1.25, 1.25)
+        self.speed = 3
         direction = [-self.speed, self.speed]
         self.x_move = random.choice(direction)
         self.y_move = random.choice(direction)
@@ -115,10 +111,14 @@ class Ball(Turtle):
         new_y = self.ycor() + self.y_move
         self.goto(new_x, new_y)
 
-    
+
+    # def change_speed(self):
+    #     self.speed *= 10
+    #     return self.speed
+
+
     def change_x(self):
         self.x_move *= -1
-        self.speed *= 0.9
 
 
     def change_y(self):
@@ -149,167 +149,146 @@ class Scoreboard(Turtle):
 
     def draw_score(self):
         self.clear()
-        self.goto(50, 250)
+        self.goto(25, 260)
         self.write(f'{self.p1_points}', align='center', font=FONT)
-        self.goto(-50, 250)
+        self.goto(0, 260)
+        self.write('x', align= 'center', font=FONT)
+        self.goto(-25, 260)
         self.write(f'{self.p2_points}', align='center', font=FONT)
         time.sleep(0.5)
 
 
     def final_screen(self):
+        screen.clear()
         self.clear()
-        self.goto(0, 100)
-        self.color('red')
+        self.goto(0, 99)
+        self.color('blue')
         self.write('GAME OVER!', align='center', font=FONT)
-        self.goto(0, 25)
+        self.goto(0, 33)
         self.write(f'Final score:', align='center', font=FONT)
-        self.goto(0, -25)
+        self.goto(0, -33)
         self.write(f'{self.p1_points} X {self.p2_points}', align='center', font=FONT)
         self.write(f'', align='center', font=FONT)
         screen.exitonclick()
 
 
 class Table(Turtle):
+
     def __init__(self):
         super().__init__()
         self.penup()
         self.color('grey')
         self.speed('fastest')
         self.shape('square')
+        self.net_size = 9
         self.borders()
         self.net()
+        self.net_bands()
 
     def borders(self):
         self.pensize(70)
-        self.goto(-400, 300)
+        self.goto(-500, 300)
         self.pendown()
-        self.goto(400, 300)
-        self.goto(400, -300)
-        self.goto(-400, -300)
-        self.goto(-400, 300)
+        self.goto(500, 300)
+        self.goto(500, -300)
+        self.goto(-500, -300)
+        self.goto(-500, 300)
 
     def net(self):
-        self.pensize(5)
+        self.counter = 2
         self.penup()
-        self.goto(-10, -210)
-        self.pendown()
-        self.goto(-10, -150)
-        self.penup()
-        self.goto(-10, -90)
-        self.pendown()
-        self.goto(-10, -30)
-        self.penup()
-        self.goto(-10, 30)
-        self.pendown()
-        self.goto(-10, 90)
-        self.penup()
-        self.goto(-10, 150)
-        self.pendown()
-        self.goto(-10, 210)
-        self.penup()
-        self.goto(-10, 270)
+        self.goto(-10, -300)
+        for i in range(-300, 300, self.net_size):
+            self.pensize(5)
+            if self.counter % 2 == 0:
+                self.penup()
+                self.goto(-10, i)
+                self.counter += 1
+            else:
+                self.pendown()
+                self.goto(-10, i)
+                self.counter += 1
 
-        self.pensize(5)
+        self.counter = 2
         self.penup()
-        self.goto(-5, -270)
-        self.pendown()
-        self.goto(-5, -210)
-        self.penup()
-        self.goto(-5, -150)
-        self.pendown()
-        self.goto(-5, -90)
-        self.penup()
-        self.goto(-5, -30)
-        self.pendown()
-        self.goto(-5, 30)
-        self.penup()
-        self.goto(-5, 90)
-        self.pendown()
-        self.goto(-5, 150)
-        self.penup()
-        self.goto(-5, 210)
-        self.pendown()
-        self.goto(-5, 270)
+        self.goto(-5, -300)
+        for i in range(-300, 300, self.net_size):
+            self.pensize(5)
+            if self.counter % 2 == 0:
+                self.pendown()
+                self.goto(-5, i)
+                self.counter += 1
+            else:
+                self.penup()
+                self.goto(-5, i)
+                self.counter += 1
 
-        self.pensize(5)
+        self.counter = 2
         self.penup()
-        self.goto(0, -210)
-        self.pendown()
-        self.goto(0, -150)
-        self.penup()
-        self.goto(0, -90)
-        self.pendown()
-        self.goto(0, -30)
-        self.penup()
-        self.goto(0, 30)
-        self.pendown()
-        self.goto(0, 90)
-        self.penup()
-        self.goto(0, 150)
-        self.pendown()
-        self.goto(0, 210)
-        self.penup()
-        self.goto(0, 270)
+        self.goto(0, -300)
+        for i in range(-300, 300, self.net_size):
+            self.pensize(5)
+            if self.counter % 2 == 0:
+                self.penup()
+                self.goto(0, i)
+                self.counter += 1
+            else:
+                self.pendown()
+                self.goto(0, i)
+                self.counter += 1
 
-        self.pensize(5)
+        self.counter = 2
         self.penup()
-        self.goto(5, -270)
-        self.pendown()
-        self.goto(5, -210)
-        self.penup()
-        self.goto(5, -150)
-        self.pendown()
-        self.goto(5, -90)
-        self.penup()
-        self.goto(5, -30)
-        self.pendown()
-        self.goto(5, 30)
-        self.penup()
-        self.goto(5, 90)
-        self.pendown()
-        self.goto(5, 150)
-        self.penup()
-        self.goto(5, 210)
-        self.pendown()
-        self.goto(5, 270)
+        self.goto(5, -300)
+        for i in range(-300, 300, self.net_size):
+            self.pensize(5)
+            if self.counter % 2 == 0:
+                self.pendown()
+                self.goto(5, i)
+                self.counter += 1
+            else:
+                self.penup()
+                self.goto(5, i)
+                self.counter += 1
 
-        self.pensize(5)
+        self.counter = 2
         self.penup()
-        self.goto(10, -210)
-        self.pendown()
-        self.goto(10, -150)
-        self.penup()
-        self.goto(10, -90)
-        self.pendown()
-        self.goto(10, -30)
-        self.penup()
-        self.goto(10, 30)
-        self.pendown()
-        self.goto(10, 90)
-        self.penup()
-        self.goto(10, 150)
-        self.pendown()
-        self.goto(10, 210)
-        self.penup()
-        self.goto(10, 270)
+        self.goto(10, -300)
+        for i in range(-300, 300, self.net_size):
+            self.pensize(5)
+            if self.counter % 2 == 0:
+                self.penup()
+                self.goto(10, i)
+                self.counter += 1
+            else:
+                self.pendown()
+                self.goto(10, i)
+                self.counter += 1
 
+    def net_bands(self):
+        self.counter = 2
+        self.color('grey')
         self.penup()
-        self.pensize(10)
-        self.goto(-15, -270)
-        self.pendown()
-        self.goto(-15, 270)
-
+        self.goto(-14, -265)
+        self.pensize(4)
+        for i in range(-265, 265):
+            self.pendown()
+            self.goto(-14, i)
+            self.counter += 1
+        
+        self.counter = 2
         self.penup()
-        self.pensize(10)
-        self.goto(15, -270)
-        self.pendown()
-        self.goto(15, 270)
+        self.goto(14, -265)
+        for i in range(-265, 265):
+            self.pendown()
+            self.goto(14, i)
+            self.counter += 1
         self.hideturtle()
 
 
 def create_screen():
     screen = Screen()
-    screen.setup(width=800, height=600)
+    screen.setup(width=1000, height=600)
     screen.bgcolor('black')
     screen.title('-=-=-=-=-=- PONG -=-=-=-=-=-')
     screen.tracer(0)
@@ -317,9 +296,7 @@ def create_screen():
 
 
 def keyboard():
-
     screen.listen()
-    
     screen.onkeypress(player_1.move_up, 'w')
     screen.onkeypress(player_1.move_down, 's')
     if player_2.mode == 0:
@@ -328,32 +305,30 @@ def keyboard():
         screen.onkeypress(player_2.move_down, 'Down')
 
 
-def game_brain():
+def game_engine():
     game_over = False
     while not game_over:
-        time.sleep(0.03)
-
+        time.sleep(0.001)
         ball.move()
         screen.update()
         
-        if ball.ycor() > 240 or ball.ycor() < -240:
+        if ball.ycor() > 250 or ball.ycor() < -250:
             ball.change_y()
 
-        if ball.xcor() < -360:
+        if ball.xcor() < -480:
             scoreboard.add_p1()
             ball.create_ball()
-        elif ball.xcor() > 360:
+        elif ball.xcor() > 480:
             scoreboard.add_p2()
-
             ball.create_ball()
 
         if player_2.mode != 0:
             player_2.ai_movement()
 
-        if ball.distance(player_1) < 50 and ball.xcor() < -330:
+        if ball.distance(player_1) < 40 and ball.xcor() < -450:
             ball.change_x()
 
-        elif ball.distance(player_2) < 50 and ball.xcor() > 330:
+        elif ball.distance(player_2) < 40 and ball.xcor() > 450:           
             ball.change_x()
            
         if scoreboard.p1_points == 10 or scoreboard.p2_points == 10:
@@ -369,6 +344,6 @@ kb = keyboard()
 table = Table()
 ball = Ball()
 scoreboard = Scoreboard()
-game = game_brain()
+game = game_engine()
 
 screen.mainloop()
