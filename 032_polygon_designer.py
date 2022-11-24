@@ -131,7 +131,10 @@ def get_polygon():
 def draw_polygon(sides, size, pen_size, pen_color, filled, fill_color, bg_color):
 	angle = 360/sides
 	pointer.penup()
-	pointer.goto(-(size/2), size*2.5)
+	if size * 2 >= 500:
+		pointer.goto(-150, 450)
+	else:
+		pointer.goto(-(size/2), size*2)
 	pointer.pencolor(pen_color)
 	pointer.pensize(pen_size)
 	pointer.fillcolor(fill_color)
@@ -154,7 +157,8 @@ def draw_polygon(sides, size, pen_size, pen_color, filled, fill_color, bg_color)
 
 pointer = Turtle()
 screen = Screen()
-screen.title('△ ◻ ⬠ ⬡ -=- Polygon designer -=- ⬡ ⬠ ◻ △')
+screen.title('△ ◻ ⬠ ⬡     || Polygon designer ||     ⬡ ⬠ ◻ △')
+screen.setup(width=1000, height=1000)
 pointer.hideturtle()
 
 get_polygon()
