@@ -121,8 +121,9 @@ def get_polygon():
 		filled = screen.textinput(title='Fill', prompt='Do you want to fill the polygon with color? (y/n)')
 		filled = filled[0].lower()
 
-	while fill_color not in COLORS:
-		fill_color = screen.textinput(title='Fill color', prompt='Color of the fill:')
+	if filled == 'y':
+		while fill_color not in COLORS:
+			fill_color = screen.textinput(title='Fill color', prompt='Color of the fill:')
 	
 	while bg_color not in COLORS:
 		bg_color = screen.textinput(title='Background color', prompt='Background color:')
@@ -131,17 +132,15 @@ def get_polygon():
 def draw_polygon(sides, size, pen_size, pen_color, filled, fill_color, bg_color):
 	angle = 360/sides
 	pointer.penup()
-	if size * 2 >= 500:
-		pointer.goto(-150, 450)
-	else:
-		pointer.goto(-(size/2), size*2)
+	pointer.goto(-(size/2), 475)
+
 	pointer.pencolor(pen_color)
 	pointer.pensize(pen_size)
 	pointer.fillcolor(fill_color)
 	screen.bgcolor(bg_color)
 	pointer.pendown()
 
-	if sides > 12:
+	if sides > 20:
 		pointer.speed('fastest')
 
 	if filled == 'y':
