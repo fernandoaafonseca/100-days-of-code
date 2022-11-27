@@ -57,7 +57,7 @@ class CarManager():
 
 
     def move_cars(self):
-        random_speed = random.randint(1, 3)
+        random_speed = random.randint(1, 5)
         speed = CAR_STARTING_SPEED + random_speed + self.level_speed
         for car in self.cars_list:
             car.forward(speed)
@@ -70,7 +70,7 @@ class CarManager():
 
 
     def increase_speed(self):
-        self.level_speed += 1
+        self.level_speed += 3
 
 
 class Scoreboard(Turtle):
@@ -102,7 +102,7 @@ class Scoreboard(Turtle):
         self.goto(0, 50)
         self.write(f'GAME OVER!', font=(FONT), align='center')
         self.goto(0, -50)
-        self.write(f'Your final level: {self.current_level-1}', font=(FONT), align='center')
+        self.write(f'Your final level: {self.current_level}', font=(FONT), align='center')
         screen.exitonclick()
 
 
