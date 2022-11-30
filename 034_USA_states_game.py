@@ -71,7 +71,7 @@ def game_engine():
             game_over = True
             break
 
-        if answer in states:
+        if answer in states and answer not in guessed_states:
             pointer = Turtle()
             pointer.penup()
             state_data = df[df['state'] == answer]
