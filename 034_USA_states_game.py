@@ -1,0 +1,94 @@
+from turtle import Turtle, Screen
+import pandas as pd
+
+
+MAP_IMAGE = 'data/034_USA_States_game_blank_map.gif'
+MAP_WIDTH = 725
+MAP_HEIGHT = 491
+CSV_FILE = 'data/034_USA_States_game_coordinates.csv'
+BIG_FONT = ('Courier', 28, 'bold')
+SMALL_FONT = ('Courier', 8, 'normal')
+
+
+def create_screen():
+    screen = Screen()
+    screen.title("USA states game")
+    screen.setup(MAP_WIDTH, MAP_HEIGHT)
+    screen.addshape(MAP_IMAGE)
+    return screen
+
+
+def draw_map():
+    canvas = Turtle()
+    canvas.shape(MAP_IMAGE)
+    return canvas
+
+
+def final_screen():
+    missing_states = []
+    for state in states:
+        if state not in guessed_states:
+            missing_states.append(state)
+
+    screen.setup(width=1000, height=1000)
+    screen.clear()
+    screen.bgcolor('purple')
+    pointer = Turtle()
+    pointer.penup()
+    pointer.hideturtle()
+    pointer.color('yellow')
+    pointer.goto(-200, 50)
+    pointer.write(f'GAME OVER!', font=BIG_FONT, align='center')
+    pointer.goto(-200, -50)
+    pointer.write(f'You guessed {len(guessed_states)}/50 States', font=BIG_FONT, align='center')
+    pointer.color('white')
+    pointer.goto(250, 350)
+    pointer.write(f'Missing States:',font=BIG_FONT,  align='center')
+    pointer.goto(250, 325)
+    for missing_state in missing_states:
+        new_y = pointer.ycor() - 15
+        pointer.goto(pointer.xcor(), new_y)
+        pointer.write(f'{missing_state}',font=SMALL_FONT,  align='center')
+
+    screen.exitonclick()
+
+
+def game_engine():
+    game_over = False
+    while not game_over:
+        answer = ''
+        user_input = screen.textinput(title='Guess the State', prompt=f'Right answers: {len(guessed_states)}/50\n\nGuess a State name:')
+        
+        if user_input == None:
+            final_screen()
+            game_over = True
+            break
+        
+        answer = user_input.strip().title()
+
+        if answer.lower() == 'exit' or len(guessed_states) == 50:
+            final_screen()
+            game_over = True
+            break
+
+        if answer in states:
+            pointer = Turtle()
+            pointer.penup()
+            state_data = df[df['state'] == answer]
+            x_axis = int(state_data['x'])
+            y_axis = int(state_data['y'])
+            pointer.goto(x_axis, y_axis)
+            pointer.hideturtle()
+            pointer.write(answer, font=SMALL_FONT)
+            guessed_states.append(answer)
+        
+
+df = pd.read_csv(CSV_FILE)
+states = df['state'].to_list()
+guessed_states = []
+screen = create_screen()
+canvas = draw_map()
+game_engine = game_engine()
+
+
+screen.mainloop()
