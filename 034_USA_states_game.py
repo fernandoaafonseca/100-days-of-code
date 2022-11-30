@@ -7,7 +7,7 @@ MAP_WIDTH = 725
 MAP_HEIGHT = 491
 CSV_FILE = 'data/034_USA_States_game_coordinates.csv'
 BIG_FONT = ('Courier', 28, 'bold')
-SMALL_FONT = ('Courier', 8, 'normal')
+SMALL_FONT = ('Courier', 10, 'normal')
 
 
 def create_screen():
@@ -52,10 +52,10 @@ def final_screen():
         pointer.write(f'You guessed {len(guessed_states)}/50 States', font=BIG_FONT, align='center')
 
         pointer.color('white')
-        pointer.goto(250, 350)
+        pointer.goto(250, 400)
         pointer.write(f'Missing States:',font=BIG_FONT,  align='center')
 
-        pointer.goto(250, 325)
+        pointer.goto(250, 350)
         for missing_state in missing_states:
             new_y = pointer.ycor() - 15
             pointer.goto(pointer.xcor(), new_y)
