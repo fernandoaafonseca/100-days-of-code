@@ -25,10 +25,7 @@ def draw_map():
 
 
 def final_screen():
-    missing_states = []
-    for state in states:
-        if state not in guessed_states:
-            missing_states.append(state)
+    missing_states = [state for state in states if state not in guessed_states]
 
     screen.setup(width=1000, height=1000)
     screen.clear()
