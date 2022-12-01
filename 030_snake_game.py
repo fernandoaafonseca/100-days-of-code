@@ -18,7 +18,6 @@ class Snake:
         self.create_snake()
         self.head = self.snake[0]
         self.speed = 10
-    
 
     def create_snake(self):
         for pos in STARTING_POS:
@@ -27,7 +26,6 @@ class Snake:
             new_segment.penup()
             new_segment.goto(pos)
             self.snake.append(new_segment)
-
     
     def increase_size(self):
         new_segment = Turtle(shape='square')
@@ -36,10 +34,8 @@ class Snake:
         new_segment.goto(self.snake[-1].position())
         self.snake.append(new_segment)
 
-
     def increase_speed(self):
         self.speed += 5
-
 
     def move(self):
         for segment in range(len(self.snake) - 1, 0, -1):
@@ -48,21 +44,17 @@ class Snake:
             self.snake[segment].goto(new_x, new_y)
         self.head.forward(self.speed)
     
-
     def up(self):
         if self.head.heading() != DOWN:
             self.head.setheading(UP)
 
-    
     def down(self):
         if self.head.heading() != UP:
             self.head.setheading(DOWN)
 
-
     def left(self):
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
-
 
     def right(self):
         if self.head.heading() != LEFT:
@@ -79,7 +71,6 @@ class Food(Turtle):
         self.speed('fastest')
         self.color('blue')
         self.create_food()
-
 
     def create_food(self):
         rand_x = random.randint(-290, 240)
@@ -100,7 +91,6 @@ class Scoreboard(Turtle):
         self.draw_score_wall()
         self.update()
     
-
     def draw_score_wall(self):
         score_wall = Turtle()
         score_wall.penup()
@@ -112,19 +102,16 @@ class Scoreboard(Turtle):
         score_wall.pendown()
         score_wall.goto(300, 300)
 
-
     def update(self):
         self.clear()
         self.write(f'Score: {self.points}', align='center', font=FONT)
-
 
     def increase_points(self):
         self.points += 1
         self.update()
         if self.points % 10 == 0:
             snake.increase_speed()
-
-    
+ 
     def final_score(self):
         self.clear()
         self.goto(0, 25)
@@ -155,7 +142,7 @@ def keyboard():
     screen.onkeypress(snake.right, 'd')
 
 
-def game_brain():
+def game_engine():
     game_over = False
     while not game_over:
         screen.update()
@@ -182,6 +169,5 @@ snake = Snake()
 kb = keyboard()
 food = Food()
 scoreboard = Scoreboard()
-game = game_brain()
-
+game_engine = game_engine()
 screen.mainloop()
