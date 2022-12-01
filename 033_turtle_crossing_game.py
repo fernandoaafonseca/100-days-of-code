@@ -21,16 +21,13 @@ class Player(Turtle):
         self.reset_position()
         self.lives = 3
 
-    
     def move(self):
         new_y = self.ycor() + PLAYER_SPEED
         self.goto(self.xcor(), new_y)
 
-    
     def reset_position(self):
         self.goto(PLAYER_STARTING_POSITION)
-
-    
+  
     def decrease_lives(self):
         self.lives -= 1
 
@@ -40,7 +37,6 @@ class CarManager():
     def __init__(self):
         self.cars_list = []
         self.level_speed = 0
-
 
     def create_car(self):
         chance = random.randint(1, 6)
@@ -55,19 +51,11 @@ class CarManager():
             new_car.goto(300, random_y)
             self.cars_list.append(new_car)
 
-
     def move_cars(self):
         random_speed = random.randint(1, 5)
         speed = CAR_STARTING_SPEED + random_speed + self.level_speed
         for car in self.cars_list:
             car.forward(speed)
-
-
-    def reset_cars(self):
-        for car in self.cars_list:
-            car.clear()
-        self.cars_list = []
-
 
     def increase_speed(self):
         self.level_speed += 3
@@ -82,10 +70,8 @@ class Scoreboard(Turtle):
         self.penup()
         self.update()
 
-
     def increase_level(self):
         self.current_level += 1
-
 
     def update(self):
         self.clear()
@@ -93,7 +79,6 @@ class Scoreboard(Turtle):
         self.write(f'Level: {self.current_level}', font=(FONT), align='left')
         self.goto(250, 250)
         self.write(f'Lives: {player.lives}', font=(FONT), align='right')
-
 
     def final_screen(self):
         screen.clear()
@@ -151,6 +136,4 @@ scoreboard = Scoreboard()
 car_manager  = CarManager()
 kb = keyboard()
 engine = game_engine()
-
-
 screen.mainloop()
