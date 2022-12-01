@@ -84,10 +84,12 @@ def game_engine():
 
         if answer in states and answer not in guessed_states:
             pointer = Turtle()
+            pointer.speed('slowest')
             pointer.penup()
             state_data = df[df['state'] == answer]
             x_axis = int(state_data['x'])
             y_axis = int(state_data['y'])
+            pointer.penup()
             pointer.goto(x_axis, y_axis)
             pointer.hideturtle()
             pointer.write(answer, font=SMALL_FONT)
