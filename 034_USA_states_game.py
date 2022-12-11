@@ -2,7 +2,7 @@ from turtle import Turtle, Screen
 import pandas as pd
 
 
-MAP_IMAGE = 'data/034_USA_States_game_blank_map.gif'
+MAP_IMAGE = 'imgs/034_USA_States_game_blank_map.gif'
 MAP_WIDTH = 725
 MAP_HEIGHT = 491
 CSV_FILE = 'data/034_USA_States_game_coordinates.csv'
