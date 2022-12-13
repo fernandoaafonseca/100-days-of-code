@@ -16,6 +16,8 @@ timer = None
 
 
 def start_timer():
+    start_button.config(state="disabled")
+    reset_button.config(state="normal")
     global repetitions
     repetitions += 1
     work_sec = WORK_MIN * 60
@@ -35,6 +37,8 @@ def start_timer():
 
 
 def reset_timer():
+    start_button.config(state="normal")
+    reset_button.config(state="disabled")
     global repetitions
     repetitions = 0
     window.after_cancel(timer)
@@ -81,6 +85,7 @@ start_button = Button(text='Start', bg=YELLOW, font=(FONT_NAME, 10), command=sta
 start_button.grid(column=0, row=2)
 
 reset_button = Button(text='Reset', bg=YELLOW, font=(FONT_NAME, 10), command=reset_timer)
+reset_button.config(state="disabled")
 reset_button.grid(column=2, row=2)
 
 check_marks = Label(text='', fg=GREEN, bg=YELLOW)
